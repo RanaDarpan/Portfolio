@@ -85,6 +85,7 @@ const Experience = () => {
         </motion.h2>
 
         <div ref={refExp} className="relative">
+          {/* Vertical line */}
           <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gray-700" />
 
           {experiences.map((exp, index) => (
@@ -93,13 +94,13 @@ const Experience = () => {
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               animate={inViewExp ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: index * 0.3, type: "spring", stiffness: 50 }}
-              className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? 'justify-end' : ''
+              className={`relative flex sm:flex-col lg:flex-row items-center mb-12 ${
+                index % 2 === 0 ? 'lg:justify-end' : ''
               }`}
             >
               <div
-                className={`w-5/12 ${
-                  index % 2 === 0 ? 'text-right pr-8' : 'pl-8'
+                className={`w-full sm:w-11/12 lg:w-5/12 ${
+                  index % 2 === 0 ? 'text-right lg:pr-8' : 'lg:pl-8'
                 }`}
               >
                 <div className="bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-cyan-400 transition-shadow duration-300">
@@ -110,7 +111,8 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              {/* Icon */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 sm:-top-6 lg:top-0">
                 <div className="w-12 h-12 rounded-full bg-cyan-400 flex items-center justify-center shadow-lg">
                   <Briefcase className="w-6 h-6 text-gray-900" />
                 </div>
@@ -136,13 +138,13 @@ const Experience = () => {
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               animate={inViewEdu ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: index * 0.3, type: "spring", stiffness: 50 }}
-              className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? 'justify-end' : ''
+              className={`relative flex sm:flex-col lg:flex-row items-center mb-12 ${
+                index % 2 === 0 ? 'lg:justify-end' : ''
               }`}
             >
               <div
-                className={`w-5/12 ${
-                  index % 2 === 0 ? 'text-right pr-8' : 'pl-8'
+                className={`w-full sm:w-11/12 lg:w-5/12 ${
+                  index % 2 === 0 ? 'text-right lg:pr-8' : 'lg:pl-8'
                 }`}
               >
                 <div className="bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-cyan-400 transition-shadow duration-300">
@@ -153,7 +155,7 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="absolute left-1/2 transform -translate-x-1/2 sm:-top-6 lg:top-0">
                 <div className="w-12 h-12 rounded-full bg-cyan-400 flex items-center justify-center shadow-lg">
                   <Briefcase className="w-6 h-6 text-gray-900" />
                 </div>
