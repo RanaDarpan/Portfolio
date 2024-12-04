@@ -3,15 +3,19 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ExternalLink, Github } from 'lucide-react';
 import ProjectModal from './ProjectModal';
+import portfolioImage from '../Assets/portfolio.jpg';
+import fitplayImage from '../Assets/fitplay.jpg';
+import geminiCloneImage from '../Assets/Gemini-Clone.jpg';
+import calculatorImage from '../Assets/cal.jpg';
 
 const projects = [
   {
     title: "Personal Portfolio Site ",
     description: "A dynamic and interactive portfolio showcasing my skills as a Full Stack Developer with modern UI, animations, and a seamless user experience.",
     longDescription: "This portfolio highlights my expertise in full-stack development, featuring a clean and modern design with smooth animations. It includes sections for my personal details, social media links, and downloadable CV, all built with responsive design and attention to user experience. The website reflects my skills in React,Framer motion , Taiwind CSS, and modern web technologies, ensuring a visually appealing and functional interface.",
-    image: "src/Assets/portfolio .jpg",
+    image: "portfolioImage,
     tags: ["React", "Tailwind", "Framer motion ","Emailjs"],
-    githubLink: "https://github.com/RanaDarpan/Fitplay",
+    githubLink: "https://github.com/RanaDarpan/Portfolio",
     liveLink: "https://example.com",
     features: [
       "Interactive Design",
