@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-// import { Code2, Palette, Globe } from 'lucide-react';
+import profile from '../Assets/profile.png';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -58,7 +58,7 @@ const About = () => {
           <div
             className="photo w-48 h-48 rounded-full overflow-hidden bg-gray-300 shadow-lg transition-all duration-300 ease-in-out"
             style={{
-              backgroundImage: 'url(/Src/Assets/profile.png)',
+              backgroundImage: profile,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
