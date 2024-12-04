@@ -1,4 +1,4 @@
-# **Portfolio Site **
+# Portfolio Site 
 
 
 ## **Key Features**
@@ -17,5 +17,10 @@
 - **Lucide React**: For icons, providing clean and customizable SVG components.
 - **Email Js**: Real time feedback mail through sending mail .
 
-## **Project Demo**:
+# 🚀 Live Demo
+Check out the live demo of the project [here](https://ranaportfolio.vercel.app/)
+
+
+
+
 
