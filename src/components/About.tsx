@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import profile from '../Assets/profile.png';
+import profile from '../Assets/profile.png'; // Importing the profile image
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -9,33 +9,30 @@ const About = () => {
     threshold: 0.1,
   });
 
-  const [hovered, setHovered] = useState(false);
-
-
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
-    const deltaX = (clientX - centerX) * 0.1; // Increased effect intensity
-    const deltaY = (clientY - centerY) * 0.1; // Increased effect intensity
+    const deltaX = (clientX - centerX) * 0.1;
+    const deltaY = (clientY - centerY) * 0.1;
 
     const photo = document.querySelector('.photo');
     if (photo) {
-      photo.style.transform = `perspective(600px) rotateY(${deltaX}deg) rotateX(${-deltaY}deg) scale(1.1)`; // Added scaling effect
+      photo.style.transform = `perspective(600px) rotateY(${deltaX}deg) rotateX(${-deltaY}deg) scale(1.1)`;
     }
   };
 
   const handleMouseLeave = () => {
     const photo = document.querySelector('.photo');
     if (photo) {
-      photo.style.transform = `perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)`; // Reset scale on mouse leave
+      photo.style.transform = `perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)`;
     }
   };
 
   return (
     <section className="py-20 bg-gray-800" id="about">
       <div className="max-w-6xl mx-auto px-4">
-      
+        {/* Section Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +46,7 @@ const About = () => {
           </p>
         </motion.div>
 
-        
+        {/* Profile Photo */}
         <motion.div
           className="relative flex justify-center items-center mb-16"
           onMouseMove={handleMouseMove}
@@ -57,17 +54,16 @@ const About = () => {
         >
           <div
             className="photo w-48 h-48 rounded-full overflow-hidden bg-gray-300 shadow-lg transition-all duration-300 ease-in-out"
-            style={{
-              backgroundImage: profile,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              objectFit: 'cover',
-            }}
-          />
+          >
+            <img
+              src={profile}
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </motion.div>
 
-        
+        {/* Buttons */}
         <motion.div
           className="flex justify-center gap-8"
           initial={{ opacity: 0 }}
@@ -75,7 +71,7 @@ const About = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <motion.a
-            href="src/Assets/Resume.pdf" 
+            href="src/Assets/Resume.pdf"
             target="_blank"
             className="px-8 py-3 bg-cyan-400 text-white rounded-full shadow-lg transition-transform transform hover:scale-110"
             whileHover={{ scale: 1.1 }}
