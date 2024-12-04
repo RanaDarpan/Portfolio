@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ExternalLink, Github } from 'lucide-react';
 import ProjectModal from './ProjectModal';
+
+// Importing images directly so they can be bundled during the build process
 import portfolioImage from '../Assets/portfolio.jpg';
 import fitplayImage from '../Assets/fitplay.jpg';
 import geminiCloneImage from '../Assets/Gemini-Clone.jpg';
@@ -12,33 +14,33 @@ const projects = [
   {
     title: "Personal Portfolio Site ",
     description: "A dynamic and interactive portfolio showcasing my skills as a Full Stack Developer with modern UI, animations, and a seamless user experience.",
-    longDescription: "This portfolio highlights my expertise in full-stack development, featuring a clean and modern design with smooth animations. It includes sections for my personal details, social media links, and downloadable CV, all built with responsive design and attention to user experience. The website reflects my skills in React,Framer motion , Taiwind CSS, and modern web technologies, ensuring a visually appealing and functional interface.",
-    image: "portfolioImage,
-    tags: ["React", "Tailwind", "Framer motion ","Emailjs"],
-    githubLink: "https://github.com/RanaDarpan/Portfolio",
+    longDescription: "This portfolio highlights my expertise in full-stack development, featuring a clean and modern design with smooth animations. It includes sections for my personal details, social media links, and downloadable CV, all built with responsive design and attention to user experience. The website reflects my skills in React, Framer Motion, Tailwind CSS, and modern web technologies, ensuring a visually appealing and functional interface.",
+    image: portfolioImage,  // Use the imported image
+    tags: ["React", "Tailwind", "Framer motion", "Emailjs"],
+    githubLink: "https://github.com/RanaDarpan/Fitplay",
     liveLink: "https://example.com",
     features: [
       "Interactive Design",
       "Responsive Layout",
       "Downloadable CV",
-      "Feedback integartion ",
+      "Feedback Integration",
       "Email-js"
     ]
   },
   {
     title: "Fitplay",
-    description: "A full-featured online Fitplay Sport Application buit using the react snd firebase.",
+    description: "A full-featured online Fitplay Sport Application built using React and Firebase.",
     longDescription: "FitPlay is a web application designed to help users achieve their fitness goals through personalized workout plans, progress tracking, and rewards for completed tasks. This app is built using modern technologies to offer a seamless user experience and real-time fitness insights.",
-    image: fitplayImage,
-    tags: ["React", "Tailwind", "Firebase-Authentication","Firebase-File_storage", "Cloud","RapidAPI"],
+    image: fitplayImage,  // Use the imported image
+    tags: ["React", "Tailwind", "Firebase-Authentication", "Firebase-File_Storage", "Cloud", "RapidAPI"],
     githubLink: "https://github.com/RanaDarpan/Fitplay",
     liveLink: "https://example.com",
     features: [
       "User authentication and authorization",
       "Profile Management",
-      "Task Progress Tracking:",
+      "Task Progress Tracking",
       "Reward Points",
-      "AI generated Suggestions ",
+      "AI generated Suggestions",
       "Social Interaction",
       "Responsive"
     ]
@@ -47,8 +49,8 @@ const projects = [
     title: "Gemini-Clone",
     description: "A beautiful and intuitive Gemini-clone chatbot application",
     longDescription: "This is a Gemini Clone built using React and Vite. The project was created as a learning exercise and covers various modern web development techniques, including API integration, custom hooks, and responsive design.",
-    image: geminiCloneImage,
-    tags: ["React", "Taiwind", "Gemini API","Vite"],
+    image: geminiCloneImage,  // Use the imported image
+    tags: ["React", "Tailwind", "Gemini API", "Vite"],
     githubLink: "https://github.com/RanaDarpan/Gemini-Clone",
     liveLink: "https://geminiclone-rana.vercel.app/",
     features: [
@@ -61,12 +63,12 @@ const projects = [
   },
   {
     title: "Super Calculator",
-    description: "It's simple Calculator for revising the concepts of the JS and frontend.",
+    description: "It's a simple Calculator for revising the concepts of JS and frontend.",
     longDescription: "Super Calculator is a web-based calculator built using HTML, CSS, and JavaScript. It supports basic arithmetic operations and provides a user-friendly interface with colorful animations. The application is designed to be interactive and responsive, making it suitable for both desktop and mobile use.",
-    image: calculatorImage,
+    image: calculatorImage,  // Use the imported image
     tags: ["HTML5", "CSS3", "JS"],
     githubLink: "https://github.com/RanaDarpan/Calculator",
-    liveLink: " https://ranadarpan.github.io/Calculator/ ",
+    liveLink: "https://ranadarpan.github.io/Calculator/",
     features: [
       "Basic Operations: Addition, subtraction, multiplication, and division.",
       "Clear Functionality",
@@ -109,7 +111,7 @@ const Projects = () => {
               >
                 <div className="relative group">
                   <img
-                    src={project.image}
+                    src={project.image}  // This will now work with imported image
                     alt={project.title}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
