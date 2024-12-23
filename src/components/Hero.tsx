@@ -147,12 +147,12 @@ const Hero = () => {
               className="flex justify-center mt-8"
             >
               <motion.a
-                href="src/Assets/Resume.pdf"
+                href="https://drive.google.com/file/d/13X8qJh-R0htklL8yL4M6FKrTeeeZYod1/view?usp=sharing"
                 download
                 className="inline-block relative group"
               >
                 <motion.button
-                  href="src/Assets/Resume.pdf"
+                  href="https://drive.google.com/file/d/13X8qJh-R0htklL8yL4M6FKrTeeeZYod1/view?usp=sharing"
                   className="px-6 py-3 text-lg font-semibold text-white bg-transparent border-2 border-cyan-400 rounded-lg transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:bg-cyan-400 group-hover:text-gray-900 hover:shadow-2xl"
                   whileHover={{
                     scale: 1.05,
