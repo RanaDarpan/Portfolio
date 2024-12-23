@@ -71,7 +71,7 @@ const About = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <motion.a
-            href="src/Assets/Resume.pdf"
+            href="https://drive.google.com/file/d/13X8qJh-R0htklL8yL4M6FKrTeeeZYod1/view?usp=sharing"
             target="_blank"
             className="px-8 py-3 bg-cyan-400 text-white rounded-full shadow-lg transition-transform transform hover:scale-110"
             whileHover={{ scale: 1.1 }}
