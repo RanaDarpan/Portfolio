@@ -34,7 +34,7 @@ const projects = [
     image: fitplayImage,  // Use the imported image
     tags: ["React", "Tailwind", "Firebase-Authentication", "Firebase-File_Storage", "Cloud", "RapidAPI"],
     githubLink: "https://github.com/RanaDarpan/Fitplay",
-    liveLink: "https://example.com",
+    liveLink: "https://fitplay-aqqmvcz1z-ranadarpans-projects.vercel.app/",
     features: [
       "User authentication and authorization",
       "Profile Management",
