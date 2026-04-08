@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Github, Star, Tag } from 'lucide-react';
+import { useData } from '../context/DataContext';
 import type { Project } from '../types';
 
 interface ProjectModalProps {
@@ -9,6 +10,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const { getImageUrl } = useData();
   // Lock body scroll when modal is open
   useEffect(() => {
     if (project) {
@@ -55,7 +57,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             {/* Hero Image */}
             <div className="relative">
               <img
-                src={project.image}
+                src={getImageUrl(project.image)}
                 alt={project.title}
                 className="w-full h-52 md:h-72 object-cover rounded-t-3xl"
               />

@@ -115,7 +115,8 @@ const ImageUpload: React.FC<{
     }
   };
 
-  const displayUrl = preview || existingUrl;
+  const { getImageUrl } = useData();
+  const displayUrl = preview || getImageUrl(existingUrl || '');
 
   return (
     <div>
@@ -326,6 +327,7 @@ const AdminPage = () => {
     updateCertificate,
     deleteCertificate,
     resetData,
+    getImageUrl,
     loading,
   } = useData();
 
@@ -656,7 +658,7 @@ const AdminPage = () => {
                           >
                             <div className="flex items-center gap-3">
                               {project.image ? (
-                                <img src={project.image} alt="" className="w-12 h-12 rounded-xl object-cover flex-shrink-0 border border-white/10" />
+                                <img src={getImageUrl(project.image)} alt="" className="w-12 h-12 rounded-xl object-cover flex-shrink-0 border border-white/10" />
                               ) : (
                                 <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center flex-shrink-0 border border-white/5">
                                   <FolderKanban className="w-5 h-5 text-brand-400" />
@@ -767,7 +769,7 @@ const AdminPage = () => {
                           >
                             <div className="flex items-center gap-3">
                               {cert.image ? (
-                                <img src={cert.image} alt="" className="w-12 h-12 rounded-xl object-cover flex-shrink-0 border border-white/10" />
+                                <img src={getImageUrl(cert.image)} alt="" className="w-12 h-12 rounded-xl object-cover flex-shrink-0 border border-white/10" />
                               ) : (
                                 <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center flex-shrink-0 border border-white/5">
                                   <Award className="w-5 h-5 text-brand-400" />

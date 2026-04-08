@@ -11,6 +11,7 @@ interface DataContextType {
   updateCertificate: (id: string, cert: FormData) => Promise<void>;
   deleteCertificate: (id: string) => Promise<void>;
   resetData: () => Promise<void>;
+  getImageUrl: (path: string) => string;
   loading: boolean;
 }
 
@@ -134,6 +135,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }));
   };
 
+  const getImageUrl = (path: string) => {
+    if (!path) return '';
+    if (path.startsWith('http') || path.startsWith('data:')) return path;
+    if (path.startsWith('/assets')) return path; // Resolutions relative to frontend
+    if (path.startsWith('uploads/')) return `${API_URL}/${path}`;
+    return path;
+  };
+
   const resetData = async () => {
     await fetchData();
   };
@@ -150,6 +159,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateCertificate,
         deleteCertificate,
         resetData,
+        getImageUrl,
         loading,
       }}
     >

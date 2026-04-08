@@ -8,7 +8,7 @@ import { useSound } from '../hooks/useSound';
 import type { Project } from '../types';
 
 const Projects = () => {
-  const { data } = useData();
+  const { data, getImageUrl } = useData();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -104,7 +104,7 @@ const Projects = () => {
                     <div className="relative overflow-hidden aspect-video">
                       <div className="absolute inset-0 bg-brand-500/10 group-hover:bg-transparent transition-colors z-10 custom-blend-overlay" />
                       <img
-                        src={project.image}
+                        src={getImageUrl(project.image)}
                         alt={project.title}
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                         loading="lazy"
