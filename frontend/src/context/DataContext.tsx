@@ -139,6 +139,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
     if (path.startsWith('/assets')) return path; // Resolutions relative to frontend
+    if (path.startsWith('/src/Assets/')) return path.replace('/src/Assets/', '/assets/projects/'); // Old MongoDB fallback
     if (path.startsWith('uploads/')) return `${API_URL}/${path}`;
     return path;
   };

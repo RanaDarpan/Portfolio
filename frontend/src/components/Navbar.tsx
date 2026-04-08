@@ -27,7 +27,7 @@ const Navbar = () => {
     >
       {/* Floating Pill Container (Max Width Limits it so it's a pill) */}
       <div 
-        className={`w-full sm:w-11/12 md:max-w-4xl transition-all duration-500 ease-in-out ${
+        className={`relative w-full sm:w-11/12 md:max-w-4xl transition-all duration-500 ease-in-out ${
           isScrolled 
             ? 'glass-strong shadow-[0_8px_32px_rgba(0,0,0,0.4)] sm:rounded-full px-4 sm:px-6 py-2' 
             : 'bg-transparent px-4 sm:px-6 py-4'
