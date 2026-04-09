@@ -33,7 +33,8 @@ router.post('/', upload.single('image'), async (req, res) => {
     if (typeof data.tags === 'string') data.tags = JSON.parse(data.tags);
     if (typeof data.features === 'string') data.features = JSON.parse(data.features);
     if (req.file) {
-      data.image = `/uploads/${req.file.filename}`;
+      const base64Image = req.file.buffer.toString('base64');
+      data.image = `data:${req.file.mimetype};base64,${base64Image}`;
     }
     const project = await Project.create(data);
     res.status(201).json(project);
@@ -49,7 +50,8 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     if (typeof data.tags === 'string') data.tags = JSON.parse(data.tags);
     if (typeof data.features === 'string') data.features = JSON.parse(data.features);
     if (req.file) {
-      data.image = `/uploads/${req.file.filename}`;
+      const base64Image = req.file.buffer.toString('base64');
+      data.image = `data:${req.file.mimetype};base64,${base64Image}`;
     }
     const project = await Project.findByIdAndUpdate(req.params.id, data, {
       new: true,
