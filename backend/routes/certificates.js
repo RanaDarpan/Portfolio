@@ -30,8 +30,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   try {
     const data = { ...req.body };
     if (req.file) {
-      const base64Image = req.file.buffer.toString('base64');
-      data.image = `data:${req.file.mimetype};base64,${base64Image}`;
+      data.image = req.file.path;
     }
     const cert = await Certificate.create(data);
     res.status(201).json(cert);
@@ -45,8 +44,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     const data = { ...req.body };
     if (req.file) {
-      const base64Image = req.file.buffer.toString('base64');
-      data.image = `data:${req.file.mimetype};base64,${base64Image}`;
+      data.image = req.file.path;
     }
     const cert = await Certificate.findByIdAndUpdate(req.params.id, data, {
       new: true,
