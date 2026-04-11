@@ -17,11 +17,13 @@ import {
   AlertCircle,
   CheckCircle2,
   Image as ImageIcon,
+  Activity,
 } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import type { Project, Certificate } from '../types';
+import { AnalyticsTab } from '../components/AnalyticsTab';
 
-type Tab = 'projects' | 'certificates';
+type Tab = 'projects' | 'certificates' | 'analytics';
 
 /* ─────────────── Subcomponents ─────────────── */
 
@@ -476,7 +478,8 @@ const AdminPage = () => {
     }
   };
 
-  const tabs: { key: Tab; label: string; icon: React.ElementType; count: number }[] = [
+  const tabs: { key: Tab; label: string; icon: React.ElementType; count?: number }[] = [
+    { key: 'analytics', label: 'Analytics', icon: Activity },
     { key: 'projects', label: 'Projects', icon: FolderKanban, count: data.projects.length },
     { key: 'certificates', label: 'Certificates', icon: Award, count: data.certificates.length },
   ];
@@ -546,15 +549,21 @@ const AdminPage = () => {
                 >
                   <t.icon className="w-4 h-4" />
                   {t.label}
-                  <span className="ml-1 text-xs px-2 py-0.5 rounded-full bg-white/5">
-                    {t.count}
-                  </span>
+                  {t.count !== undefined && (
+                    <span className="ml-1 text-xs px-2 py-0.5 rounded-full bg-white/5">
+                      {t.count}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
 
-            {/* Add button */}
-            {!showAddForm && (
+            {tab === 'analytics' ? (
+               <AnalyticsTab />
+            ) : (
+              <>
+                {/* Add button */}
+                {!showAddForm && (
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -848,6 +857,9 @@ const AdminPage = () => {
                 <Home className="w-4 h-4" /> Back to Portfolio
               </a>
             </div>
+            </>
+            )}
+            
           </>
         )}
       </div>
