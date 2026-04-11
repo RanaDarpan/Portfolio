@@ -22,8 +22,8 @@ export const AnalyticsTab = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-        const res = await fetch(`${API_URL}/visitors/stats`);
+        const API_URL = import.meta.env.VITE_API_URL || '';
+        const res = await fetch(`${API_URL}/api/visitors/stats`);
         const data = await res.json();
         
         if (data.success) {

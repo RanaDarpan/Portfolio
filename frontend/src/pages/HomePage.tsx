@@ -34,8 +34,8 @@ const HomePage = () => {
         }
 
         // Post to our backend
-        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-        await fetch(`${API_URL}/visitors`, {
+        const API_URL = import.meta.env.VITE_API_URL || '';
+        await fetch(`${API_URL}/api/visitors`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
