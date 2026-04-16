@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Github, Star, Tag } from 'lucide-react';
+import { X, ExternalLink, Github, Star, Tag, Eye, Lock } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import type { Project } from '../types';
 
@@ -11,6 +11,7 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const { getImageUrl } = useData();
+  const [showPreview, setShowPreview] = useState(false);
   // Lock body scroll when modal is open
   useEffect(() => {
     if (project) {
@@ -54,22 +55,53 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             style={{ background: 'var(--glass-strong-bg)', border: '1px solid var(--glass-border)' }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Hero Image */}
-            <div className="relative">
-              <img
-                src={getImageUrl(project.image)}
-                alt={project.title}
-                className="w-full h-52 md:h-72 object-cover rounded-t-3xl"
-              />
-              {/* Gradient overlay on image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-t-3xl" />
-
-              {/* Title on image */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-2xl md:text-3xl font-bold font-display text-white drop-shadow-lg">
-                  {project.title}
-                </h3>
-              </div>
+            {/* Hero Image / Preview */}
+            <div className="relative bg-[#000000] rounded-t-3xl border-b border-white/5 p-1 pt-1.5 px-1.5">
+              {showPreview && project.liveLink ? (
+                <div className="w-full h-[65vh] md:h-[75vh] rounded-[1.2rem] overflow-hidden relative flex flex-col bg-[#1c1c1e] ring-1 ring-white/10 shadow-2xl">
+                  {/* MacOS Header */}
+                  <div className="h-10 w-full bg-[#f6f6f6] dark:bg-[#2d2d2f] border-b border-black/10 dark:border-white/10 flex items-center px-4 shrink-0 relative">
+                    {/* Traffic Lights */}
+                    <div className="flex gap-2 relative z-10">
+                      <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] cursor-pointer hover:bg-[#e0443e]" onClick={onClose} />
+                      <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] cursor-pointer hover:bg-[#dea123]" onClick={() => setShowPreview(false)} />
+                      <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] cursor-pointer hover:bg-[#1aab29]" />
+                    </div>
+                    {/* URL Bar */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="px-4 py-1 rounded-md bg-[#e5e5e5] dark:bg-[#1c1c1e] text-[11px] text-gray-600 dark:text-gray-300 font-medium font-mono border border-black/5 dark:border-white/5 flex items-center gap-2 max-w-[60%] truncate">
+                        <Lock className="w-3 h-3 text-green-600 dark:text-green-400 shrink-0" />
+                        <span className="truncate">{project.liveLink.replace(/^https?:\/\//, '')}</span>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Browser Body */}
+                  <div className="flex-1 w-full relative bg-white">
+                    <iframe 
+                      src={project.liveLink} 
+                      className="absolute inset-0 w-full h-full border-0"
+                      title={`${project.title} Interactive Preview`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <img
+                    src={getImageUrl(project.image)}
+                    alt={project.title}
+                    className="w-full h-52 md:h-72 object-cover rounded-t-3xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-t-3xl pointer-events-none" />
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
+                    <h3 className="text-2xl md:text-3xl font-bold font-display text-white drop-shadow-lg">
+                      {project.title}
+                    </h3>
+                  </div>
+                </>
+              )}
 
               {/* Close Button */}
               <button
@@ -160,15 +192,32 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   </a>
                 )}
                 {project.liveLink && (
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:opacity-90 hover:shadow-lg"
-                    style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
-                  >
-                    <ExternalLink className="w-4 h-4" /> Live Demo
-                  </a>
+                  <>
+                    <button
+                      onClick={() => setShowPreview(!showPreview)}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all"
+                      style={{
+                        background: showPreview ? 'var(--glass-bg)' : 'linear-gradient(135deg, #0ea5e9, #6366f1)',
+                        color: 'white',
+                        border: showPreview ? '1px solid var(--glass-border)' : '1px solid transparent',
+                      }}
+                    >
+                      {showPreview ? <><X className="w-4 h-4" /> Close Interactive Preview</> : <><Eye className="w-4 h-4" /> Interactive Preview</>}
+                    </button>
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all hover:opacity-90 hover:shadow-lg"
+                      style={{ 
+                        background: showPreview ? 'var(--glass-bg)' : 'linear-gradient(135deg, #6366f1, #8b5cf6)', 
+                        color: showPreview ? 'var(--text-primary)' : 'white', 
+                        border: showPreview ? '1px solid var(--glass-border)' : '1px solid transparent' 
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4" /> Open In Tab
+                    </a>
+                  </>
                 )}
               </div>
             </div>

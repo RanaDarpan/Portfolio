@@ -18,6 +18,22 @@ const Navbar = () => {
 
   const navItems = ['About', 'Skills', 'Experience', 'Projects', 'Certifications', 'Contact'];
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    playClick();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -55,7 +71,7 @@ const Navbar = () => {
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                onClick={playClick}
+                onClick={(e: any) => scrollToSection(e, item.toLowerCase())}
                 className="relative px-3 py-2 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-300 group rounded-full"
                 whileHover={{ backgroundColor: 'rgba(99,102,241,0.05)' }}
                 whileTap={{ scale: 0.95 }}
@@ -123,9 +139,9 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
                     className="block px-4 py-3 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-brand-500/10 rounded-xl transition-all duration-300"
-                    onClick={() => {
-                      playClick();
-                      setIsMobileMenuOpen(false);
+                    onClick={(e: any) => {
+                      scrollToSection(e, item.toLowerCase());
+                      setTimeout(() => setIsMobileMenuOpen(false), 200);
                     }}
                   >
                     {item}

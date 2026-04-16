@@ -79,7 +79,11 @@ const Hero = () => {
           >
             <motion.a
               href="#projects"
-              onClick={playClick}
+              onClick={(e: React.MouseEvent) => {
+                e.preventDefault();
+                playClick();
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white transition-all duration-300 relative overflow-hidden"
               style={{
                 background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',

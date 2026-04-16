@@ -10,6 +10,7 @@ interface DataContextType {
   addCertificate: (cert: FormData) => Promise<void>;
   updateCertificate: (id: string, cert: FormData) => Promise<void>;
   deleteCertificate: (id: string) => Promise<void>;
+  updateFilterTags: (tags: string[]) => Promise<void>;
   resetData: () => Promise<void>;
   getImageUrl: (path: string) => string;
   loading: boolean;
@@ -22,15 +23,16 @@ const mapId = (item: any) => ({ ...item, id: item._id || item.id });
 const API_URL = import.meta.env.VITE_API_URL || '';
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [data, setData] = useState<PortfolioData>({ projects: [], certificates: [] });
+  const [data, setData] = useState<PortfolioData>({ projects: [], certificates: [], filterTags: [] });
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [projectsRes, certsRes] = await Promise.all([
+      const [projectsRes, certsRes, settingsRes] = await Promise.all([
         fetch(`${API_URL}/api/projects`),
         fetch(`${API_URL}/api/certificates`),
+        fetch(`${API_URL}/api/settings`),
       ]);
 
       if (!projectsRes.ok || !certsRes.ok) {
@@ -39,10 +41,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       const projects = await projectsRes.json();
       const certificates = await certsRes.json();
+      const settings = settingsRes.ok ? await settingsRes.json() : { filterTags: [] };
 
       setData({
         projects: (Array.isArray(projects) ? projects : []).map(mapId),
         certificates: (Array.isArray(certificates) ? certificates : []).map(mapId),
+        filterTags: Array.isArray(settings?.filterTags) ? settings.filterTags : [],
       });
     } catch (error) {
       console.error('Failed to fetch portfolio data:', error);
@@ -145,6 +149,21 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return path;
   };
 
+  const updateFilterTags = async (tags: string[]) => {
+    const res = await fetch(`${API_URL}/api/settings/tags`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ filterTags: tags }),
+    });
+    if (!res.ok) {
+      throw new Error('Failed to update filter tags');
+    }
+    const updatedSettings = await res.json();
+    setData(prev => ({ ...prev, filterTags: updatedSettings.filterTags || [] }));
+  };
+
   const resetData = async () => {
     await fetchData();
   };
@@ -160,6 +179,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addCertificate,
         updateCertificate,
         deleteCertificate,
+        updateFilterTags,
         resetData,
         getImageUrl,
         loading,

@@ -111,6 +111,10 @@ const About = () => {
               </motion.a>
               <motion.a
                 href="#contact"
+                onClick={(e: React.MouseEvent) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-text-secondary glass hover:bg-black/10 dark:hover:bg-white/10 transition-all"

@@ -21,7 +21,7 @@ const Certifications = () => {
           <span className="inline-block text-brand-400 font-semibold text-sm tracking-widest uppercase mb-4">
             Credentials
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-white">
+          <h2 className="text-4xl md:text-5xl font-bold font-display text-text-primary">
             Certifications & <span className="gradient-text">Awards</span>
           </h2>
         </motion.div>
@@ -42,21 +42,21 @@ const Certifications = () => {
                     <Award className="w-6 h-6 text-brand-400" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-white mb-1 font-display leading-tight">
+                    <h3 className="text-lg font-bold text-text-primary mb-1 font-display leading-tight">
                       {cert.title}
                     </h3>
-                    <p className="text-brand-400 text-sm font-medium">{cert.issuer}</p>
+                    <p className="text-brand-600 dark:text-brand-400 text-sm font-medium">{cert.issuer}</p>
                   </div>
                 </div>
 
                 {/* Date */}
                 <div className="flex items-center gap-2 mb-4">
-                  <Calendar className="w-3.5 h-3.5 text-slate-500" />
-                  <span className="text-xs text-slate-500 font-mono">{cert.date}</span>
+                  <Calendar className="w-3.5 h-3.5 text-text-secondary" />
+                  <span className="text-xs text-text-secondary font-mono">{cert.date}</span>
                 </div>
 
                 {/* Description */}
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
+                <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-1">
                   {cert.description}
                 </p>
 
@@ -66,7 +66,7 @@ const Certifications = () => {
                     href={cert.credentialLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-brand-400 hover:text-brand-300 transition-colors font-medium"
+                    className="inline-flex items-center gap-2 text-sm text-brand-600 dark:text-brand-400 hover:text-brand-500 dark:hover:text-brand-300 transition-colors font-medium"
                     whileHover={{ x: 4 }}
                   >
                     View Credential <ExternalLink className="w-3.5 h-3.5" />

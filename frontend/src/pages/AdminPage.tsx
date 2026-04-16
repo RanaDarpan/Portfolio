@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Image as ImageIcon,
   Activity,
+  Tag,
 } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import type { Project, Certificate } from '../types';
@@ -331,6 +332,7 @@ const AdminPage = () => {
     resetData,
     getImageUrl,
     loading,
+    updateFilterTags,
   } = useData();
 
   const [tab, setTab] = useState<Tab>('projects');
@@ -625,6 +627,28 @@ const AdminPage = () => {
 
             {/* List */}
             <div className="space-y-4">
+              {tab === 'projects' && (
+                <div className="glass rounded-2xl p-6 md:p-8 gradient-border mb-8 mt-2">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Tag className="w-5 h-5 text-brand-400" />
+                    <h3 className="text-lg font-bold text-white font-display">Global Filter Tags</h3>
+                  </div>
+                  <p className="text-sm text-slate-400 mb-4">
+                    Manage the tags that appear in the portfolio filtering menu. These will be shown in the exact order you add them.
+                  </p>
+                  <TagInput
+                    tags={data.filterTags || []}
+                    onChange={(newTags) => {
+                      updateFilterTags(newTags).then(() => {
+                        showToastMsg('Filter tags updated successfully!', 'success');
+                      }).catch(() => {
+                        showToastMsg('Failed to update filter tags.', 'error');
+                      });
+                    }}
+                    placeholder="Add filter tags (e.g. Next.js, React, Node)..."
+                  />
+                </div>
+              )}
               {tab === 'projects' &&
                 data.projects.map((project) => (
                   <motion.div

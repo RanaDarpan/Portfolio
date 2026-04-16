@@ -23,4 +23,5 @@ export interface Certificate {
 export interface PortfolioData {
   projects: Project[];
   certificates: Certificate[];
+  filterTags?: string[];
 }

@@ -8,6 +8,7 @@ import projectRoutes from './routes/projects.js';
 import certificateRoutes from './routes/certificates.js';
 import contactRoutes from './routes/contact.js';
 import visitorRoutes from './routes/visitors.js';
+import settingsRoutes from './routes/settings.js';
 import Project from './models/Project.js';
 import Certificate from './models/Certificate.js';
 
@@ -32,6 +33,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/certificates', certificateRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/visitors', visitorRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {
